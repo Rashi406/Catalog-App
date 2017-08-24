@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<div class="row top-menu">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-right"></div>
+</div>
+<div class = 'flash'>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li> <strong> {{ message }} </strong> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<div class="row">
+    <div class="col-md-4 padding-none">
+        <div class="row divider blue">
+            <div class="col-md-12"></div>
+        </div>
+        <div class="row banner main">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h1>Category</h1>
+            </div>
+        </div>
+        {% for cat in categories %}
+        <a href = "{{url_for('showItems', category_id = cat.id)}}">
+            <h3 class="cat-list">{{cat.name}}</h3>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-7 padding-none">
+        <div class="row divider blue">
+            <div class="col-md-12"></div>
+        </div>
+        <div class="row banner main">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h1>{{category.name}}</h1>
+            </div>
+        </div>
+        {% for item in items %}
+        <a href = "{{url_for('showItemDetail', item_id = item.id)}}">
+            <h3 class="cat-list">{{item.name}}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
